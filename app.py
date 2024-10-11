@@ -202,6 +202,8 @@ def flowers(flower_id):
 
 @app.route('/lab2/add_flower/<name>')
 def add_flower(name):
+    if not name:
+        return "Вы не задали имя цветка", 400
     flower_list.append(name)
     return f'''
 <!doctype html>
@@ -214,6 +216,22 @@ def add_flower(name):
     </body>
 </html>
 '''
+@app.route('/lab2/flowers/')
+def show_all_flowers():
+    return f'''
+<!doctype html>
+<html>
+    <body>
+    <h1> Все цветы </h1>
+    <p> Всего цветов: {len(flower_list)} </p>
+    <ul>
+        {"".join(f"<li>{flower}</li>" for flower in flower_list)}
+    </ul>
+    </body>
+</html>
+'''
+
+
 @app.route('/lab2/example')
 def example():
     name = 'Ярославцев Богдан'
@@ -232,3 +250,8 @@ def example():
 @app.route('/lab2/')
 def lab2():
     return render_template('lab2.html')
+
+@app.route('/lab2/filters')
+def filters():
+    phrase = 'О <b>сколько</b> <u>нам</u> <i>открытий чудных...'
+    return render_template('filter.html', phrase=phrase)
