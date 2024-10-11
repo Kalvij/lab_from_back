@@ -11,4 +11,8 @@
     <div>Фраза: {{phrase | safe}}</div>
     <div>Фраза: {{phrase | striptags | replace('сколько', 'много') | replace('нам', 'тут') | upper}}</div>
     <div>Фраза: {{phrase | striptags | reverse}}</div>
+
+    <div>
+        <a href="{{ url_for('lab2') }}">Главное меню</a>
+    </div>
 {% endblock %}

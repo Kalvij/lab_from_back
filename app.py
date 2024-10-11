@@ -39,6 +39,9 @@ def menu():
                     <li>
                         <a href="/lab1">Лабораторная работа 1</a>
                     </li>
+                    <li>
+                        <a href="/lab2">Лабораторная работа 2</a>
+                    </li>
                 
                 </ol>
             </div>
@@ -265,7 +268,7 @@ def calc(a, b):
         delenie = "Делить на ноль нельзя"
     else:
         delenie = a / b
-    #div_result = "Деление на ноль невозможно" if b == 0 else num1 / num2
+    
     stepen = a ** b
     return f'''
 <!doctype html>
@@ -278,6 +281,7 @@ def calc(a, b):
     <p style="color: black;text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;font-size: 23px;text-decoration: none;margin: 10px">{a} / {b} = {delenie}</p>
     <p style="color: black;text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;font-size: 23px;text-decoration: none;margin: 10px">{a} <sup> {b} </sup>= {stepen}</p>
     </body>
+
 </html>
 '''
 @app.route('/lab2/calc/')

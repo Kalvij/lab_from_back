@@ -5,11 +5,29 @@
 
 {#основной контент: #}
 {% block main %}
+    <div>
+        <a href="{{ url_for('menu') }}">Главное меню</a>
+    </div>
     <h1>Шаблоны</h1>
     <div>Тема лабораторной - шаблоны. Список сделанных страниц:</div>
     <ol>
         <li>
-            <a href="/lab2/example">example</a>
+            <a style="text-decoration: none;" href="/lab2/example">Пример</a>
+        </li>
+        <li>
+            <a style="text-decoration: none;" href="/lab2/filters">Фильтры</a>
+        </li>
+        <li>
+            <a style="text-decoration: none;" href="/lab2/flowers">Цветы</a>
+        </li>
+        <li>
+            <a style="text-decoration: none;" href="/lab2/calc">Вычесления</a>
+        </li>
+        <li>
+            <a style="text-decoration: none;" href="/lab2/books">Книги</a>
+        </li>
+        <li>
+            <a style="text-decoration: none;" href="/lab2/car">Машины</a>
         </li>
     </ol>
 {% endblock %}
