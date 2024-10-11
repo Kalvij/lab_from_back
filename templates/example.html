@@ -3,19 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ярославцев Богдан Всеволодович. Лабораторная 2</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='lab1.css') }}">
-        <style>
-            main{
-                word-spacing: 3px;
-                margin: 5px; 
-            }
-        </style>
+        <title>
+            {% if name %}
+                {{name}}. 
+            {% else %}
+                Анонимус. 
+            {% endif %} 
+            Лабораторная работа {{numlab}}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
     
     <body>
         <header>
-            WEB-программирование, часть 2. Лабораторная работа {{numlab}}
+            WEB-программирование, часть 2. {% if numlab %}Лабораторная работа {{numlab}}{% endif %}
         </header>
 
         <main>
@@ -29,7 +29,23 @@
 
         <footer>
             <hr>
-            &copy; {{name}}, {{group}}, {{numbCourse}}, 2024   
+            &copy;
+            {% if name %}
+                {{name}},
+            {% else %}
+                Анонимус,
+            {% endif %}
+            {% if group %}
+                {{group}},
+            {% else %}
+                Ноу группы,
+            {% endif %}
+            {% if numbCourse %}
+                {{numbCourse}},
+            {% else %}
+                Бузкурсник,
+            {% endif %}
+            2024   
         </footer>
     </body>
 </html>

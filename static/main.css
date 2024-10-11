@@ -1,0 +1,11 @@
+main {
+    color: black;
+    text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;
+    font-size: 23px;
+    text-decoration: none;
+    margin: 10px;
+    margin-bottom: 5px;
+}
+body {
+    background: #eb99fc5b;
+}
