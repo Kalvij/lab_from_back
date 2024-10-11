@@ -255,3 +255,34 @@ def lab2():
 def filters():
     phrase = 'О <b>сколько</b> <u>нам</u> <i>открытий чудных...'
     return render_template('filter.html', phrase=phrase)
+
+@app.route('/lab2/calc/<int:a>/<int:b>')
+def calc(a, b):
+    sum = a + b
+    minus = a - b
+    mul = a * b
+    if b == 0:
+        delenie = "Делить на ноль нельзя"
+    else:
+        delenie = a / b
+    #div_result = "Деление на ноль невозможно" if b == 0 else num1 / num2
+    stepen = a ** b
+    return f'''
+<!doctype html>
+<html>
+    <body style="background: #eb99fc5b;">
+    <h1> Расчет с параметрами </h1>
+    <p style="color: black;text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;font-size: 23px;text-decoration: none;margin: 10px">{a} + {b} = {sum}</p>
+    <p style="color: black;text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;font-size: 23px;text-decoration: none;margin: 10px">{a} - {b} = {minus}</p>
+    <p style="color: black;text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;font-size: 23px;text-decoration: none;margin: 10px">{a} * {b} = {mul}</p>
+    <p style="color: black;text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;font-size: 23px;text-decoration: none;margin: 10px">{a} / {b} = {delenie}</p>
+    <p style="color: black;text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;font-size: 23px;text-decoration: none;margin: 10px">{a} <sup> {b} </sup>= {stepen}</p>
+    </body>
+</html>
+'''
+@app.route('/lab2/calc/')
+def redirect_to_default():
+    return redirect('/lab2/calc/1/1')
+@app.route('/lab2/calc/<int:a>')
+def redirect_with_default_b(a):
+    return redirect(f'/lab2/calc/{a}/1')
