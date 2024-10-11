@@ -286,3 +286,18 @@ def redirect_to_default():
 @app.route('/lab2/calc/<int:a>')
 def redirect_with_default_b(a):
     return redirect(f'/lab2/calc/{a}/1')
+
+book_list = [
+    {'author': 'Агата Кристи', 'name': 'Десять негритят', 'ganre': 'роман', 'pages': 1056},
+    {'author': 'Фрэнсис Скотт Фицджеральд', 'name': 'Великий Гэтсби', 'ganre': 'роман', 'pages': 1152},
+    {'author': 'Джордж Оруэлл', 'name': '1984', 'ganre': 'роман-антиутопия', 'pages': 1360},
+    {'author': 'Джейн Остин', 'name': 'Гордость и предубеждение', 'ganre': 'роман', 'pages': 1376},
+    {'author': 'Эрих Мария Ремарк', 'name': 'Три товарища', 'ganre': 'роман', 'pages': 1424},
+    {'author': 'Габриэль Гарсиа Маркес', 'name': 'Сто лет одиночества', 'ganre': 'роман', 'pages': 1472},
+    {'author': 'Федор Достоевский', 'name': 'Преступление и наказание', 'ganre': 'роман', 'pages': 1492},
+    {'author': 'Виктор Гюго', 'name': 'Отверженные', 'ganre': 'роман', 'pages': 3031},
+    {'author': 'Антон Чехов', 'name': 'Рассказы', 'ganre': 'автобиография', 'pages': 3600}
+]
+@app.route('/lab2/books')
+def books():
+    return render_template('books.html', book_list=book_list)
