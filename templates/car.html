@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 2{% endblock%}
+
+{% block main %}
+    <h1>Машины</h1>
+    <ul>
+        {% for car in car_list %}
+            <li>{{ car.title }}</li>
+            <ol>Описание: {{ car.description }}</ol>
+            <ol>Цена: ${{ car.price }}</ol>
+            <img style="border-radius: 12px;height: 400;margin-left: 2%;border: 2px solid white;" src="{{ car.image_url }}" alt="{{ car.title }}" width="400"></ol>
+        {% endfor %}
+    </ul>
+{% endblock %}

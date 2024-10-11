@@ -301,3 +301,14 @@ book_list = [
 @app.route('/lab2/books')
 def books():
     return render_template('books.html', book_list=book_list)
+
+@app.route('/lab2/car')
+def mops():
+    car_list = [
+    {'title': 'Toyota Camry', 'description': 'Комфортный седан с отличной репутацией надежности.', 'price': 25000, 'image_url': url_for('static', filename='toy.jpg')},
+    {'title': 'Honda Civic', 'description': 'Экономичный и динамичный автомобиль с современным дизайном.', 'price': 22000, 'image_url': url_for('static', filename='honda.jpg')},
+    {'title': 'Ford Mustang', 'description': 'Классический американский спорткар с мощным двигателем.', 'price': 35000, 'image_url': url_for('static', filename='ford.jpg')},
+    {'title': 'Tesla Model 3', 'description': 'Электрический седан с передовыми технологиями и высокой автономностью.', 'price': 40000, 'image_url': url_for('static', filename='tesla.webp')},
+    {'title': 'BMW X5', 'description': 'Премиальный внедорожник с роскошным интерьером и превосходными характеристиками.', 'price': 60000, 'image_url': url_for('static', filename='bmw.webp')},
+]
+    return render_template('car.html', car_list=car_list)
