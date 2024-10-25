@@ -65,7 +65,7 @@ def menu():
 
 @app.route('/lab2/')
 def lab2():
-    return render_template('lab2.html')
+    return render_template('lab2/lab2.html')
 
 
 

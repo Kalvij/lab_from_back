@@ -121,11 +121,11 @@ def oak():
 <!DOCTYPE html>
 <html lang="ru">
     <head>
-        <link rel="stylesheet" href="''' + url_for('static', filename='lab1.css') + '''">
+        <link rel="stylesheet" href="''' + url_for('static', filename='lab1/lab1.css') + '''">
     </head>
     <body>
         <h1>Дуб</h1>
-        <img style="border-radius: 10px;" src="''' + url_for('static',filename='oak2.jfif') + '''">
+        <img style="border-radius: 10px;" src="''' + url_for('static',filename='lab1/oak2.jfif') + '''">
     </body>
 </html>  
 '''
@@ -137,11 +137,11 @@ def student():
 <!DOCTYPE html>
 <html lang="ru">
     <head>
-        <link rel="stylesheet" href="''' + url_for('static', filename='logo.css') + '''">
+        <link rel="stylesheet" href="''' + url_for('static', filename='lab1/logo.css') + '''">
     </head>
     <body>
         <h1>Ярославцев Богдан Всеволодович</h1>
-        <img style="border-radius: 10px;" src="''' + url_for('static',filename='logo.jpeg') + '''">
+        <img style="border-radius: 10px;" src="''' + url_for('static',filename='lab1/logo.jpeg') + '''">
     </body>
 </html>
 '''
@@ -153,7 +153,7 @@ def python():
 <!DOCTYPE html>
 <html lang="ru">
     <head>
-        <link rel="stylesheet" href="''' + url_for('static', filename='python.css') + '''">
+        <link rel="stylesheet" href="''' + url_for('static', filename='lab1/python.css') + '''">
     </head>
     <body>
         <h1>Python: Простой и мощный язык программирования</h1>
@@ -164,7 +164,7 @@ def python():
         машинного обучения и автоматизации задач.</p>
         <p>Одной из сильных сторон Python является его активное и дружелюбное сообщество. Разработчики со всего мира делятся своими знаниями, создают библиотеки и инструменты, а 
         также помогают друг другу в решении проблем.</p>
-        <img style="border-radius: 10px;" src="''' + url_for('static',filename='fon.jpg') + '''">
+        <img style="border-radius: 10px;" src="''' + url_for('static',filename='lab1/fon.jpg') + '''">
     </body>
 </html>
 '''
@@ -176,7 +176,7 @@ def japan():
 <!DOCTYPE html>
 <html lang="ru">
     <head>
-        <link rel="stylesheet" href="''' + url_for('static', filename='japan.css') + '''">
+        <link rel="stylesheet" href="''' + url_for('static', filename='lab1/japan.css') + '''">
     </head>
     <body>
         <h1>Фудзияма: Священная гора Японии</h1>
@@ -185,7 +185,7 @@ def japan():
         <p>В японской мифологии Фудзияма ассоциируется с божеством огня Сусаноо. Традиционно считается, что гора является домом для богов, и многие японцы посещают ее, чтобы поклониться и получить
         благословение.</p>
         <p>Фудзияма окружена живописными пейзажами, включая леса, горные озера и водопады. Национальный парк Фудзияма-Хаконе-Идзу — популярное место для пеших прогулок и альпинизма.</p>
-        <img style="border-radius: 10px;" src="''' + url_for('static',filename='fud.jpg') + '''">
+        <img style="border-radius: 10px;" src="''' + url_for('static',filename='lab1/fud.jpg') + '''">
     </body>
 </html>
 '''

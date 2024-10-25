@@ -115,13 +115,13 @@ def example():
         {'name': 'мандарины', 'price': 95},
         {'name': 'манго', 'price': 321}
     ]
-    return render_template('example.html', name=name, numlab=numlab, group=group, numbCourse=numbCourse, fruits=fruits)
+    return render_template('lab2/example.html', name=name, numlab=numlab, group=group, numbCourse=numbCourse, fruits=fruits)
 
 
 @lab2.route('/lab2/filters')
 def filters():
     phrase = 'О <b>сколько</b> <u>нам</u> <i>открытий чудных...'
-    return render_template('filter.html', phrase=phrase)
+    return render_template('lab2/filter.html', phrase=phrase)
 
 @lab2.route('/lab2/calc/<int:a>/<int:b>')
 def calc(a, b):
@@ -168,15 +168,15 @@ book_list = [
 ]
 @lab2.route('/lab2/books')
 def books():
-    return render_template('books.html', book_list=book_list)
+    return render_template('lab2/books.html', book_list=book_list)
 
 @lab2.route('/lab2/car')
 def car():
     car_list = [
-    {'title': 'Toyota Camry', 'description': 'Комфортный седан с отличной репутацией надежности.', 'price': 25000, 'image_url': url_for('static', filename='toy.jpg')},
-    {'title': 'Honda Civic', 'description': 'Экономичный и динамичный автомобиль с современным дизайном.', 'price': 22000, 'image_url': url_for('static', filename='honda.jpg')},
-    {'title': 'Ford Mustang', 'description': 'Классический американский спорткар с мощным двигателем.', 'price': 35000, 'image_url': url_for('static', filename='ford.jpg')},
-    {'title': 'Tesla Model 3', 'description': 'Электрический седан с передовыми технологиями и высокой автономностью.', 'price': 40000, 'image_url': url_for('static', filename='tesla.webp')},
-    {'title': 'BMW X5', 'description': 'Премиальный внедорожник с роскошным интерьером и превосходными характеристиками.', 'price': 60000, 'image_url': url_for('static', filename='bmw.webp')},
+    {'title': 'Toyota Camry', 'description': 'Комфортный седан с отличной репутацией надежности.', 'price': 25000, 'image_url': url_for('static', filename='lab2/toy.jpg')},
+    {'title': 'Honda Civic', 'description': 'Экономичный и динамичный автомобиль с современным дизайном.', 'price': 22000, 'image_url': url_for('static', filename='lab2/honda.jpg')},
+    {'title': 'Ford Mustang', 'description': 'Классический американский спорткар с мощным двигателем.', 'price': 35000, 'image_url': url_for('static', filename='lab2/ford.jpg')},
+    {'title': 'Tesla Model 3', 'description': 'Электрический седан с передовыми технологиями и высокой автономностью.', 'price': 40000, 'image_url': url_for('static', filename='lab2/tesla.webp')},
+    {'title': 'BMW X5', 'description': 'Премиальный внедорожник с роскошным интерьером и превосходными характеристиками.', 'price': 60000, 'image_url': url_for('static', filename='lab2/bmw.webp')},
 ]
-    return render_template('car.html', car_list=car_list)
+    return render_template('lab2/car.html', car_list=car_list)
