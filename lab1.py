@@ -7,8 +7,6 @@ def start():
 
 @lab1.route("/menu")
 def menu():
-
-
     return """
 <!DOCTYPE html>
 <html lang="ru">
@@ -61,8 +59,6 @@ def menu():
 
 @lab1.route("/lab1")
 def lab():
-
-
     return """
 <!DOCTYPE html>
 <html lang="ru">
@@ -121,10 +117,6 @@ def lab():
 
 @lab1.route('/lab1/oak')
 def oak():
-
-
-
-
     return '''
 <!DOCTYPE html>
 <html lang="ru">
@@ -141,10 +133,6 @@ def oak():
 
 @lab1.route('/lab1/student')
 def student():
-
-
-
-
     return '''
 <!DOCTYPE html>
 <html lang="ru">

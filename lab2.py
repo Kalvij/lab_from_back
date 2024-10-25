@@ -1,6 +1,11 @@
 from flask import Blueprint, redirect, url_for, render_template
 lab2 = Blueprint('lab2', __name__)
 
+
+@lab2.route("/index")
+def start():
+    return redirect("/menu",code=302)
+
 @lab2.route("/menu")
 def menu():
     return """
@@ -37,12 +42,13 @@ def menu():
                     <li>
                         <a href="/lab2">Лабораторная работа 2</a>
                     </li>
+                    <li>
+                        <a href="/lab3">Лабораторная работа 3</a>
+                    </li>
                 
                 </ol>
             </div>
         </main>
-
-
         <footer>
             <hr>
             &copy;Ярославцев Богдан, ФБИ-24, 3 курс, 2024   
@@ -50,11 +56,15 @@ def menu():
     </body>
 </html>
 """
+@lab2.route('/lab2/')
+def lab():
+    return render_template('lab2.html')
+
 @lab2.route('/lab2/a')
 def a():
     return 'без слэша'
 
-@lab2.route('/lab2/a/')
+@lab2.route('/lab2/a')
 def a2():
     return 'со слэшем'
 
@@ -71,7 +81,7 @@ def flowers(flower_id):
 def add_flower(name):
     if not name:
         return "Вы не задали имя цветка", 400
-    flower_list.append(name)
+    flower_list.lab2end(name)
     return f'''
 <!doctype html>
 <html>
@@ -97,6 +107,8 @@ def show_all_flowers():
     </body>
 </html>
 '''
+
+
 @lab2.route('/lab2/example')
 def example():
     name = 'Ярославцев Богдан'
@@ -112,13 +124,12 @@ def example():
     ]
     return render_template('example.html', name=name, numlab=numlab, group=group, numbCourse=numbCourse, fruits=fruits)
 
-@lab2.route('/lab2/')
-def lab():
-    return render_template('lab2.html')
+
 @lab2.route('/lab2/filters')
 def filters():
     phrase = 'О <b>сколько</b> <u>нам</u> <i>открытий чудных...'
     return render_template('filter.html', phrase=phrase)
+
 @lab2.route('/lab2/calc/<int:a>/<int:b>')
 def calc(a, b):
     sum = a + b
@@ -128,6 +139,7 @@ def calc(a, b):
         delenie = "Делить на ноль нельзя"
     else:
         delenie = a / b
+    #div_result = "Деление на ноль невозможно" if b == 0 else num1 / num2
     
     stepen = a ** b
     return f'''
@@ -141,7 +153,6 @@ def calc(a, b):
     <p style="color: black;text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;font-size: 23px;text-decoration: none;margin: 10px">{a} / {b} = {delenie}</p>
     <p style="color: black;text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;font-size: 23px;text-decoration: none;margin: 10px">{a} <sup> {b} </sup>= {stepen}</p>
     </body>
-
 </html>
 '''
 @lab2.route('/lab2/calc/')
@@ -165,8 +176,9 @@ book_list = [
 @lab2.route('/lab2/books')
 def books():
     return render_template('books.html', book_list=book_list)
+
 @lab2.route('/lab2/car')
-def mops():
+def car():
     car_list = [
     {'title': 'Toyota Camry', 'description': 'Комфортный седан с отличной репутацией надежности.', 'price': 25000, 'image_url': url_for('static', filename='toy.jpg')},
     {'title': 'Honda Civic', 'description': 'Экономичный и динамичный автомобиль с современным дизайном.', 'price': 22000, 'image_url': url_for('static', filename='honda.jpg')},
