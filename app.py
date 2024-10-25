@@ -1,9 +1,11 @@
 from flask import Flask, redirect, url_for, render_template
 from lab1 import lab1
 from lab2 import lab2
+from lab3 import lab3
 app = Flask(__name__)
 app.register_blueprint(lab1)
 app.register_blueprint(lab2)
+app.register_blueprint(lab3)
 
 @app.route("/")
 @app.route("/index")
@@ -46,6 +48,9 @@ def menu():
                     <li>
                         <a href="/lab2">Лабораторная работа 2</a>
                     </li>
+                    <li>
+                        <a href="/lab3">Лабораторная работа 3</a>
+                    </li>
                 
                 </ol>
             </div>
@@ -75,26 +80,6 @@ def not_found(err):
         </header>
          <h2>Ошибка 404 - такой страницы не существует</h2>
         <footer>
-            &copy; Ярославцев Богдан, ФБИ-24, 3 курс, 2024
-        </footer>
-    </body>
-</html>
-'''
-@app.errorhandler(500)
-def not_found(err):
-    return '''
-<!doctype html>
-<html>
-    <head>
-        <title>НГТУ, ФБ, Лабораторные работы</title>
-        <link rel="stylesheet" href="''' + url_for('static', filename='lab1.css') + '''">
-    </head>
-    <body>
-        <header>
-            НГТУ, ФБ, WEB-программирование, часть 2. Список лабораторных
-        </header>
-        <h2>Ошибка 500 - сервер не смог обработать запрос</h2>
-         <footer>
             &copy; Ярославцев Богдан, ФБИ-24, 3 курс, 2024
         </footer>
     </body>
