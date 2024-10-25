@@ -131,3 +131,35 @@ def clear_cookies():
     resp.delete_cookie('varstyle')
     
     return resp
+
+car = [
+    {'name': 'Toyota Camry', 'price': 2500000, 'brand': 'Toyota', 'color': 'Белый'},
+    {'name': 'BMW X5', 'price': 6500000, 'brand': 'BMW', 'color': 'Чёрный'},
+    {'name': 'Mercedes-Benz C-Class', 'price': 5500000, 'brand': 'Mercedes-Benz', 'color': 'Серебристый'},
+    {'name': 'Audi A4', 'price': 4000000, 'brand': 'Audi', 'color': 'Синий'},
+    {'name': 'Ford Focus', 'price': 1500000, 'brand': 'Ford', 'color': 'Красный'},
+    {'name': 'Hyundai Solaris', 'price': 1200000, 'brand': 'Hyundai', 'color': 'Серый'},
+    {'name': 'Volkswagen Tiguan', 'price': 3200000, 'brand': 'Volkswagen', 'color': 'Зелёный'},
+    {'name': 'Lexus RX', 'price': 7000000, 'brand': 'Lexus', 'color': 'Чёрный'},
+    {'name': 'Nissan Qashqai', 'price': 2300000, 'brand': 'Nissan', 'color': 'Белый'},
+    {'name': 'Kia Sportage', 'price': 2400000, 'brand': 'Kia', 'color': 'Синий'},
+    {'name': 'Mazda CX-5', 'price': 2800000, 'brand': 'Mazda', 'color': 'Красный'},
+    {'name': 'Chevrolet Tahoe', 'price': 5500000, 'brand': 'Chevrolet', 'color': 'Чёрный'},
+    {'name': 'Subaru Forester', 'price': 2600000, 'brand': 'Subaru', 'color': 'Серый'},
+    {'name': 'Volvo XC60', 'price': 4800000, 'brand': 'Volvo', 'color': 'Белый'},
+    {'name': 'Renault Duster', 'price': 1400000, 'brand': 'Renault', 'color': 'Зелёный'},
+    {'name': 'Peugeot 3008', 'price': 3000000, 'brand': 'Peugeot', 'color': 'Серебристый'},
+    {'name': 'Mitsubishi Outlander', 'price': 2700000, 'brand': 'Mitsubishi', 'color': 'Чёрный'},
+    {'name': 'Skoda Octavia', 'price': 1800000, 'brand': 'Skoda', 'color': 'Синий'},
+    {'name': 'Jeep Grand Cherokee', 'price': 6000000, 'brand': 'Jeep', 'color': 'Белый'},
+    {'name': 'Cadillac Escalade', 'price': 8500000, 'brand': 'Cadillac', 'color': 'Чёрный'}
+]
+@lab3.route('/lab3/search')
+def search():
+    return render_template('lab3/search.html')
+@lab3.route('/lab3/res')
+def res():
+    min_price = request.args.get('min_price', type=int)
+    max_price = request.args.get('max_price', type=int)
+    filtered_phones = [phone for phone in car if min_price <= phone["price"] <= max_price]
+    return render_template('lab3/result.html', phones=filtered_phones)
