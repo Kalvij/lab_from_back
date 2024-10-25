@@ -86,3 +86,36 @@ def settings():
     resp = make_response(render_template ('lab3/settings.html', color=color, back_color=back_color, 
                                              font_size=font_size, varstyle=varstyle))
     return resp
+
+@lab3.route('/lab3/ticket')
+def ticket():
+    pas_name = request.args.get('pas_name')
+    polka_type = request.args.get('polka_type')
+    with_bedding = request.args.get('with_bedding')
+    with_luggage = request.args.get('with_luggage')
+    age = request.args.get('age')
+    point = request.args.get('point')
+    destination_point = request.args.get('destination_point')
+    travel_date = request.args.get('travel_date')
+    medstrax = request.args.get('medstrax')
+    if pas_name and polka_type and age and point and destination_point and travel_date:
+        age = int(age)
+        
+        ticket_price = 1000 if age >= 18 else 700  
+        if polka_type in ['lower', 'lower_side']:
+            ticket_price += 100
+        if with_bedding == 'on':
+            ticket_price += 75
+        if with_luggage == 'on':
+            ticket_price += 250
+        if medstrax == 'on':
+            ticket_price += 150
+        ticket_type = "Детский билет" if age < 18 else "Взрослый билет"
+        return render_template('lab3/check.html', 
+                               pas_name=pas_name, 
+                               ticket_type=ticket_type,
+                               ticket_price=ticket_price,
+                               point=point,
+                               destination_point=destination_point,
+                               travel_date=travel_date)
+    return render_template('lab3/ticket.html')
