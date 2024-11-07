@@ -3,11 +3,11 @@
 {% block main %}
 <h2>Результаты поиска</h2>
 <ul>
-    {% for phone in phones %}
-        <li>{{ phone.name }} - {{ phone.price }} руб. ({{ phone.color }}, {{ phone.brand }})</li>
+    {% for car in cares %}
+        <li>{{ car.name }} - {{ car.price }} руб. ({{ car.color }}, {{ car.brand }})</li>
     {% endfor %}
 </ul>
-{% if not phones %}
+{% if not cares %}
     <p>Товары не найдены. </p> 
 {% endif %}
 <a href="{{ url_for('lab3.search') }}">Вернуться к поиску</a>
