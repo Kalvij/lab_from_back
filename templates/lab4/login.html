@@ -3,9 +3,6 @@
 {% block main %}
     {% if authorized %}
         <h1> Добро пожаловать, {{ login }}!</h1>
-    {% else %}
-        <h1> Вход</h1>
-    
         <style>
             button, input {
                 text-shadow: 1px 1px 0px rgb(255, 255, 255), 1px 1px 0px rgb(255, 255, 255), 1px 1px 0px rgb(255, 255, 255), 1px 1px 0px rgb(255, 255, 255);
@@ -16,6 +13,14 @@
                 border-radius: 10px;
             }
         </style>
+        <div>
+            <form action="/lab4/logout" method="post">
+                <button>Выход</button>
+            </form>
+        </div>
+    {% else %}
+        <h1> Вход</h1>
+        
         <h2> Пожалуйста, авторизуйтесь </h2>
         <form method="post"> 
             <div>
