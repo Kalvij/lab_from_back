@@ -96,7 +96,6 @@ def tree():
         tree_count -= 1
     elif operation == 'plant':
         tree_count +=1
-
     return redirect ('/lab4/tree')
 
 @lab4.route('/lab4/login', methods=['GET', 'POST'])
