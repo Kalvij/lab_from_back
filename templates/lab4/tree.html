@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block lab %}Нравится/не нравится{% endblock %}
+
+{% block main %}
+    <div>
+        Посажено деревьев: {{ tree_count }}
+    </div>
+    <style>
+        button {
+            text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;
+            font-size: 17px;
+            color: black;
+            border: 1px solid rgb(255, 255, 255);
+            background: rgb(128, 240, 228);
+            border-radius: 10px;
+        }
+    </style>
+    <form method="post">
+        <button name="operation" value="plant"> Посадить дерево</button>
+        <button name="operation" value="cut"> Срубить дерево</button>
+    </form>
+{% endblock %}
