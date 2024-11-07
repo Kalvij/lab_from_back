@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block lab %}Лабораторная работа 4{% endblock %}
+{% block main %}
+    {% if authorized %}
+        <h1> Добро пожаловать, {{ login }}!</h1>
+    {% else %}
+        <h1> Вход</h1>
+        <style>
+            button, input {
+                text-shadow: 1px 1px 0px rgb(255, 255, 255), 1px 1px 0px rgb(255, 255, 255), 1px 1px 0px rgb(255, 255, 255), 1px 1px 0px rgb(255, 255, 255);
+                font-size: 17px;
+                color: rgb(0, 0, 0);
+                border: 1px solid rgb(255, 255, 255);
+                background: rgb(255, 255, 255);
+                border-radius: 10px;
+            }
+        </style>
+        <h2> Пожалуйста, авторизуйтесь </h2>
+        <form method="post"> 
+            <div>
+                <label for="login">Пользователь: </label>
+                <input type="text" id="login" name="login">
+            </div>
+            <div>
+                <label for="password">Пароль: </label>
+                <input type="password" id="password" name="password">
+            </div>
+                <div>{{ error }}</div>
+            <div>
+                <button type="submit">Войти</button>
+                <button type="reset">Отмена</button>
+            </div>
+        </form>
+    {% endif %}
+{% endblock %}
