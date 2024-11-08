@@ -2,7 +2,7 @@
 {% block lab %}Лабораторная работа 4{% endblock %}
 {% block main %}
     {% if authorized %}
-        <h1> Добро пожаловать, {{ login }}!</h1>
+        <h1>Добро пожаловать, {{name}}!</h1>
         <style>
             button, input {
                 text-shadow: 1px 1px 0px rgb(255, 255, 255), 1px 1px 0px rgb(255, 255, 255), 1px 1px 0px rgb(255, 255, 255), 1px 1px 0px rgb(255, 255, 255);
@@ -13,11 +13,9 @@
                 border-radius: 10px;
             }
         </style>
-        <div>
-            <form action="/lab4/logout" method="post">
-                <button>Выход</button>
-            </form>
-        </div>
+        <form method="post" action="/lab4/logout">
+            <button type="submit">Выйти</button>
+        </form>
     {% else %}
         <h1> Вход</h1>
         
@@ -25,13 +23,13 @@
         <form method="post"> 
             <div>
                 <label for="login">Пользователь: </label>
-                <input type="text" id="login" name="login">
+                <input type="text" id="login" name="login" value="{{ login }}">
             </div>
             <div>
                 <label for="password">Пароль: </label>
                 <input type="password" id="password" name="password">
             </div>
-                <div>{{ error }}</div>
+                <div style="color: rgb(155, 79, 79); font-size: 24px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">{{ error }}</div>
             <div>
                 <button type="submit">Войти</button>
                 <button type="reset">Отмена</button>
