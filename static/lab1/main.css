@@ -35,3 +35,29 @@ body {
     padding: 0 20px;
     margin-bottom: 15px;
 }
+.bt {
+    display: inline-block;
+    padding:  10px;
+    margin: 5px;
+    border: 1px solid rgb(10, 97, 196);
+    background-color: #3a357c;
+    border-radius: 5px;
+    text-align: center;
+}
+a.bt {
+    color: #000000;
+    text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;
+    text-decoration: none;
+}
+.bt-container{
+    background-color: #d31aab63;
+    padding: 23px;
+    text-align: center;
+    margin-left: -17px;
+    width: 100%;
+}
+
+.log {
+    text-align: right;
+    margin-top: -50px;
+}
