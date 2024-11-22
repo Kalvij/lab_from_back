@@ -163,7 +163,7 @@ def edit(article_id):
     article = cur.fetchone()
     db_close(conn, cur)
     if not article:
-        return render_template('lab5/articles.html', message='Не найдена статья.')
+        return render_template('lab5/articles.html', message='Не найдена  статья.')
     if request.method == 'GET':
         return render_template('lab5/edit_article.html', article=article)
     
