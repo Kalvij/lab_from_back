@@ -10,7 +10,9 @@
     <a href="{{ url_for('lab5.list') }}" class="bt">Список статей</a>
     <a href="{{ url_for('lab5.create') }}" class="bt">Создать статью</a>
     <a href="{{ url_for('lab5.users') }}" class="bt">Пользователи</a>
-    <a href="{{ url_for('lab5.logout') }}" class="bt">Выйти</a> 
+    <a href="{{ url_for('lab5.logout') }}" class="bt">Выйти</a>
+    <a href="http://127.0.0.1:5000/lab6/" class="bt">Забронировать</a>
+    
 </div>
 <p class="log">{{ login if login else 'Anonymou' }}</p>
 {% endblock %}
