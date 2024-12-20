@@ -1,97 +1,174 @@
-from flask import Blueprint, render_template, request, abort
+from flask import Blueprint, render_template, request, jsonify, abort, current_app
+import psycopg2
+from psycopg2.extras import RealDictCursor
+import sqlite3
+from os import path
 
 lab7 = Blueprint('lab7', __name__)
 
-@lab7.route('/lab7/')
-def main():
-    return render_template('lab7/lab7.html')
+def db_connect():
+    if current_app.config['DB_TYPE'] == 'postgres':
+        conn = psycopg2.connect(
+            host='127.0.0.1',
+            database='bogdan_yroslavcev_knowledge_base',
+            user='bogdan_yroslavcev_knowledge_base',
+            password='123'
+        )
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+    else:
+        dir_path = path.dirname(path.realpath(__file__))
+        db_path = path.join(dir_path, "database.db")
+        conn = sqlite3.connect(db_path)
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
 
-films = [
-    {
-        'title': 'The Dark Knight',
-        'title_ru': 'Темный рыцарь',
-        'year': 2008,
-        'description': 'Кристофер Нолан представил один из самых культовых фильмов о Бэтмене. \
-            Фильм рассказывает о противостоянии Бэтмена (Кристиан Бейл) и Джокера (Хит Леджер), \
-            который стал одной из самых ярких ролей в истории кино. Сюжет поражает своими нюансами \
-            и философскими размышлениями о добре и зле.'
-    },
-    {
-        'title': 'Pulp Fiction',
-        'title_ru': 'Криминальное чтиво',
-        'year': 1994,
-        'description': 'Квентин Тарантино создал культовый фильм, который стал классикой жанра. \
-            Сюжет состоит из нескольких переплетающихся историй о преступниках, гангстерах и \
-            обычных людях. Фильм знаменит своим нелинейным повествованием, яркими персонажами \
-            и остроумными диалогами.'
-    },
-    {
-        'title': 'The Shawshank Redemption',
-        'title_ru': 'Побег из Шоушенка',
-        'year': 1994,
-        'description': 'Фильм Фрэнка Дарабонта по рассказу Стивена Кинга рассказывает историю \
-            двух заключенных, которые находят надежду и дружбу в тюрьме Шоушенк. Главные роли \
-            исполнили Тим Роббинс и Морган Фриман. Фильм поражает своей глубиной, эмоциональной \
-            силой и философией о свободе.'
-    },
-    {
-        'title': 'Inglourious Basterds',
-        'title_ru': 'Бесславные ублюдки',
-        'year': 2009,
-        'description': 'Квентин Тарантино снял эпическую историю о группе еврейских солдат, \
-            которые пытаются уничтожить нацистских лидеров во время Второй мировой войны. \
-            Фильм знаменит своими динамичными сценами, яркими персонажами и неожиданными поворотами.'
-    },
-    {
-        'title': 'The Lord of the Rings: The Fellowship of the Ring',
-        'title_ru': 'Властелин колец: Братство кольца',
-        'year': 2001,
-        'description': 'Первая часть эпической трилогии Питера Джексона по роману Дж.Р.Р. Толкина. \
-            Фильм рассказывает о путешествии хоббита Фродо, который должен уничтожить Кольцо Всевластья. \
-            Фильм поражает своими визуальными эффектами, эмоциональной глубиной и масштабными сценами.'
-    }
-]
+    return conn, cur
+
+def db_close(conn, cur):
+    conn.commit()
+    cur.close()
+    conn.close()
+
+@lab7.route('/lab7/')
+def lab():
+    return render_template('lab7/lab7.html')
 
 @lab7.route('/lab7/rest-api/films/', methods=['GET'])
 def get_films():
-    return films
+    conn, cur = db_connect()
+    cur.execute("SELECT * FROM films")
+    films = cur.fetchall()
+    db_close(conn, cur)
+    return jsonify(films)
 
 @lab7.route('/lab7/rest-api/films/<int:id>', methods=['GET'])
 def get_film(id):
-    if 0 <= id < len(films):
-        return films[id]
+    conn, cur = db_connect()
+    if current_app.config.get('DB_TYPE') == 'postgres':
+        cur.execute("SELECT * FROM films WHERE id = %s", (id,))
     else:
+        cur.execute("SELECT * FROM films WHERE id = ?", (id,))
+    film = cur.fetchone()
+    db_close(conn, cur)
+    
+    if not film:
         abort(404)
+    
+    if current_app.config.get('DB_TYPE') == 'sqlite' and film:
+        film = dict(film)
+    
+    return jsonify(film)
+
 
 @lab7.route('/lab7/rest-api/films/<int:id>', methods=['DELETE'])
 def del_film(id):
-    if 0 <= id < len(films):
-        del films[id]
-        return '', 204
+    conn, cur = db_connect()
+    if current_app.config.get('DB_TYPE') == 'postgres':
+        cur.execute("DELETE FROM films WHERE id = %s RETURNING *", (id,))
     else:
+        cur.execute("DELETE FROM films WHERE id = ?", (id,))
+        deleted_film = cur.fetchone()
+    
+    db_close(conn, cur)
+    
+    
+    if current_app.config.get('DB_TYPE') == 'sqlite' and deleted_film:
+        deleted_film = dict(deleted_film)
+    
+    if not deleted_film:
         abort(404)
+    
+    return '', 204
+
 
 @lab7.route('/lab7/rest-api/films/<int:id>', methods=['PUT'])
 def put_film(id):
-    if 0 <= id < len(films):
-        film = request.get_json()
-        if film ['description'] == '':
-            return {'description': 'Заполните описание'}, 400
-        if not film.get('title'):
-            film['title'] = film['title_ru']
-        films[id] = film
-        return films[id]
+    film = request.get_json()
+    
+    if not film.get('description', ''):
+        return jsonify({'description': 'Заполните описание'}), 400
+    elif len(film['description']) > 2000:
+        return jsonify({'description': 'Описание не должно превышать 2000 символов'}), 400
+    
+    if not film.get('title') and not film.get('title_ru'):
+        return jsonify({'title': 'Заполните поля с названиями'}), 400
+    
+    if not film.get('title_ru'):
+        return jsonify({'title_ru': 'Заполните русское название'}), 400
+
+    if not film.get('year'):
+        return jsonify({'year': 'Укажите год выпуска фильма'}), 400
+    elif not str(film['year']).isdigit() or int(film['year']) < 1800 or int(film['year']) > 2100:
+        return jsonify({'year': 'Введите корректный год (1800-2100)'}), 400
+
+    conn, cur = db_connect()
+  
+    if current_app.config.get('DB_TYPE') == 'postgres':
+        cur.execute("""
+            UPDATE films
+            SET title = %s, title_ru = %s, year = %s, description = %s
+            WHERE id = %s RETURNING *
+        """, (film['title'], film['title_ru'], film['year'], film['description'], id))
     else:
+        cur.execute("""
+            UPDATE films
+            SET title = ?, title_ru = ?, year = ?, description = ?
+            WHERE id = ?
+        """, (film['title'], film['title_ru'], film['year'], film['description'], id))
+        updated_film = cur.fetchone()
+    db_close(conn, cur)
+    
+    if current_app.config.get('DB_TYPE') == 'sqlite' and updated_film:
+        updated_film = dict(updated_film)
+    
+    if not updated_film:
         abort(404)
+    
+    return jsonify(updated_film)
 
 @lab7.route('/lab7/rest-api/films/', methods=['POST'])
 def add_film():
     film = request.get_json()
-    if not film:
+    
+    if not film.get('description', ''):
+        return jsonify({'description': 'Заполните описание'}), 400
+    elif len(film['description']) > 2000:
+        return jsonify({'description': 'Описание не должно превышать 2000 символов'}), 400
+    
+    if not film.get('title') and not film.get('title_ru'):
+        return jsonify({'title': 'Заполните поля с названиями'}), 400
+    
+    if not film.get('title_ru'):
+        return jsonify({'title_ru': 'Заполните русское название'}), 400
+
+    if not film.get('year'):
+        return jsonify({'year': 'Укажите год выпуска фильма'}), 400
+    elif not str(film['year']).isdigit() or int(film['year']) < 1800 or int(film['year']) > 2100:
+        return jsonify({'year': 'Введите корректный год (1800-2100)'}), 400
+
+    conn, cur = db_connect()
+    
+    if current_app.config.get('DB_TYPE') == 'postgres':
+        cur.execute("""
+            INSERT INTO films (title, title_ru, year, description)
+            VALUES (%s, %s, %s, %s) RETURNING *
+        """, (film['title'], film['title_ru'], film['year'], film['description']))
+        new_film = cur.fetchone()  # Получаем вставленную строку
+    else:
+        cur.execute("""
+            INSERT INTO films (title, title_ru, year, description)
+            VALUES (?, ?, ?, ?)
+        """, (film['title'], film['title_ru'], film['year'], film['description']))
+        conn.commit()
+        cur.execute("SELECT * FROM films WHERE rowid = last_insert_rowid()")
+        new_film = cur.fetchone()
+    
+    db_close(conn, cur)
+    
+    if current_app.config.get('DB_TYPE') == 'sqlite' and new_film:
+        new_film = dict(new_film)
+    
+    if not new_film:
         abort(404)
-    if film.get('description', '') == '':
-        return {'description': 'Заполните описание'}, 400
-    if not film.get('title'):
-        film['title'] = film['title_ru']
-    films.append(film)
-    return film, 201
+    
+    return jsonify(new_film), 201
