@@ -24,4 +24,26 @@
     <div>
         <button onclick="addFilm()">Добавить фильм</button>
     </div>
+    <div class = "modal">
+        <input type = "hidden" id="id">
+        <label>
+            Название фильма на русском:
+            <input type="text" id="title_ru">
+        </label> <br>
+        <label>
+            Название фильма на оригинальном языке
+            <i>(если фильм русский, оставьте поле пустым):</i>
+            <input type="text" id="title">
+        </label> <br>
+        <label>
+            Год выпуска:
+            <input type="number" id="year">
+        </label> <br>
+        <label>
+            Описание:
+            <textarea id="description"></textarea>
+        </label> <br>
+        <button onclick="sendFilm()"> ОК </button>
+        <button onclick="cancel()">Отмена</button>
+    </div>
 {% endblock %}
