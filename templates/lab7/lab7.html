@@ -4,6 +4,99 @@
 
 {% block script %}
 <script src="{{url_for('static', filename='lab7/main.js')}}"></script>
+<style>
+    .modal {
+        display: none;
+        z-index: 100;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(135deg, #e6f7ff, #f0e6ff);
+        width: 400px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        padding: 30px;
+        border-radius: 12px;
+        font-family: 'Arial', sans-serif;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .modal input, .modal textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #a388c7;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        font-size: 16px;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+    }
+
+    .modal input:focus, .modal textarea:focus {
+        border-color: #70699e;
+        outline: none;
+    }
+
+    .modal label {
+        margin-bottom: 8px;
+        display: block;
+        color: #555;
+        font-size: 18px;
+    }
+
+    .modal button {
+        padding: 12px 25px;
+        background-color: #6a5acd;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .modal button:hover {
+        background-color: #8a2be2;
+        transform: scale(1.05);
+    }
+
+    .error-message {
+        color: #ff4d4d;
+        font-size: 14px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+
+    th, td {
+        border: 1px solid #a388c7;
+        padding: 12px;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    th {
+        background-color: #b19cd9;
+        color: rgb(0, 0, 0);
+    }
+
+    button {
+        padding: 12px 25px;
+        background-color: #6a5acd;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-left: 10px;
+    }
+
+    button:hover {
+        background-color: #8a2be2;
+        transform: scale(1.05);
+    }
+</style>
 {% endblock %}
 
 {% block main %}
