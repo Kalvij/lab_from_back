@@ -42,7 +42,7 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
+        
         .block:hover {
             background-color: #4a54e1;
             transform: translateY(-5px);
@@ -64,6 +64,7 @@
         <a href="{{ url_for('lab8.login') }}" class="block">Вход</a>
         <a href="{{ url_for('lab8.article_list') }}" class="block">Статьи</a>
         <a href="{{ url_for('lab8.create') }}" class="block">Создать статью</a>
+        <a style="margin-right: -310px;" href="{{ url_for('lab8.logout') }}" class="block">Выйти</a>
     </div>
     {% endblock %}
 </body>
