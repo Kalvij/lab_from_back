@@ -3,6 +3,6 @@
 {% block lab %}Лабораторная работа 9{% endblock %}
 
 {% block main %}
-    <h1>Поздравления</h1>
-    <a href="{{ url_for('lab9.lab9_name') }}">Начать</a>
+    <h1>{{ greeting }}</h1>
+    <img src="{{ url_for('static', filename=image) }}" alt="Подарок">
 {% endblock %}

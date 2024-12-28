@@ -7,19 +7,131 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='lab1/main.css') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.ico') }}">
     <style>
-        body{
-            {% if request.cookies.get('color') %}
-                color: {{ request.cookies.get('color') }};
-            {% endif %}
-            {% if request.cookies.get('back_color') %}
-                background-color: {{ request.cookies.get('back_color') }};
-            {% endif %}
-            {% if request.cookies.get('font_size') %}
-                font-size: {{ request.cookies.get('font_size') }}px;
-            {% endif %}
-            {% if request.cookies.get('varstyle') %}
-                font-style: {{request.cookies.get('varstyle') }};
-            {% endif %}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a3d62; /* Темно-синий фон */
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            background-image: url("{{ url_for('static', filename='lab9/snow.png') }}");
+            background-repeat: repeat;
+        }
+
+        /* Шапка */
+        header {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Основной контент */
+        main {
+            margin-top: 80px; /* Отступ для шапки */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        /* Контейнер для контента */
+        .container {
+            background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* Заголовки */
+        h1 {
+            font-size: 2.5em;
+            color: #ff6f61; /* Розовый цвет */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Формы */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button {
+            background-color: #ff6f61; /* Розовый цвет */
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff4a3d; /* Темно-розовый */
+        }
+
+        /* Изображения */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Ссылки */
+        a {
+            color: #ff6f61;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ff4a3d;
+        }
+
+        /* Подвал */
+        footer {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
+            padding: 10px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        /* Новогодние элементы */
+        .snowflake {
+            position: absolute;
+            color: #fff;
+            font-size: 1.5em;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh); }
+            100% { transform: translateY(100vh); }
         }
     </style>
     {% block script %} {% endblock %}
@@ -30,11 +142,33 @@
     </header>
     
     <main>
-        {% block main %}{% endblock %}
+        <div class="container">
+            {% block main %}{% endblock %}
+        </div>
     </main>
 
     <footer>
         &copy; Ярославцев Богдан, ФБИ-24, 3 курс, 2024
     </footer>
+
+    <!-- Новогодние снежинки -->
+    <div class="snowflake" style="left: 10%;top: 15%; animation-duration: 8s;">❅</div>
+    <div class="snowflake" style="left: 20%;top: 15%; animation-duration: 6s;">❅</div>
+    <div class="snowflake" style="left: 30%;top: 15%; animation-duration: 10s;">❅</div>
+    <div class="snowflake" style="left: 40%;top: 15%; animation-duration: 7s;">❅</div>
+    <div class="snowflake" style="left: 50%;top: 15%; animation-duration: 9s;">❅</div>
+    <div class="snowflake" style="left: 60%;top: 15%; animation-duration: 5s;">❅</div>
+    <div class="snowflake" style="left: 70%;top: 15%; animation-duration: 8s;">❅</div>
+    <div class="snowflake" style="left: 80%;top: 15%; animation-duration: 6s;">❅</div>
+    <div class="snowflake" style="left: 90%;top: 15%; animation-duration: 7s;">❅</div>
+    <div class="snowflake" style="left: 15%;top: 15%; animation-duration: 4s;">❅</div>
+    <div class="snowflake" style="left: 25%;top: 15%; animation-duration: 12s;">❅</div>
+    <div class="snowflake" style="left: 35%;top: 15%; animation-duration: 5s;">❅</div>
+    <div class="snowflake" style="left: 45%;top: 15%; animation-duration: 4s;">❅</div>
+    <div class="snowflake" style="left: 55%;top: 15%; animation-duration: 7s;">❅</div>
+    <div class="snowflake" style="left: 67%;top: 15%; animation-duration: 3s;">❅</div>
+    <div class="snowflake" style="left: 78%;top: 15%; animation-duration: 7s;">❅</div>
+    <div class="snowflake" style="left: 82%;top: 15%; animation-duration: 5s;">❅</div>
+    <div class="snowflake" style="left: 94%;top: 15%; animation-duration: 11s;">❅</div>
 </body>
 </html>
