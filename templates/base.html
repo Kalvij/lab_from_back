@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #0a3d62; /* Темно-синий фон */
+            background-color: #0a3d62; 
             color: #fff;
             margin: 0;
             padding: 0;
@@ -22,10 +22,10 @@
             background-repeat: repeat;
         }
 
-        /* Шапка */
+    
         header {
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
+            background-color: rgba(255, 255, 255, 0.1); 
             padding: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             position: fixed;
@@ -33,9 +33,9 @@
             z-index: 1000;
         }
 
-        /* Основной контент */
+        
         main {
-            margin-top: 80px; /* Отступ для шапки */
+            margin-top: 80px; 
             width: 100%;
             display: flex;
             justify-content: center;
@@ -43,9 +43,9 @@
             flex-grow: 1;
         }
 
-        /* Контейнер для контента */
+        
         .container {
-            background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
+            background-color: rgba(255, 255, 255, 0.1);
             padding: 30px;
             border-radius: 15px;
             backdrop-filter: blur(10px);
@@ -54,15 +54,15 @@
             width: 100%;
         }
 
-        /* Заголовки */
+        
         h1 {
             font-size: 2.5em;
-            color: #ff6f61; /* Розовый цвет */
+            color: #ff6f61; 
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* Формы */
+        
         form {
             display: flex;
             flex-direction: column;
@@ -80,17 +80,17 @@
         }
 
         button {
-            background-color: #ff6f61; /* Розовый цвет */
+            background-color: #ff6f61; 
             color: #fff;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #ff4a3d; /* Темно-розовый */
+            background-color: #ff4a3d; 
         }
 
-        /* Изображения */
+       
         img {
             max-width: 100%;
             height: auto;
@@ -99,7 +99,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        /* Ссылки */
+        
         a {
             color: #ff6f61;
             text-decoration: none;
@@ -110,10 +110,10 @@
             color: #ff4a3d;
         }
 
-        /* Подвал */
+        
         footer {
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
+            background-color: rgba(255, 255, 255, 0.1); 
             padding: 10px;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
             position: fixed;
@@ -121,7 +121,7 @@
             z-index: 1000;
         }
 
-        /* Новогодние элементы */
+        
         .snowflake {
             position: absolute;
             color: #fff;
@@ -133,6 +133,17 @@
             0% { transform: translateY(-10vh); }
             100% { transform: translateY(100vh); }
         }
+        
+        img.gift-image {
+            width: 600px; 
+            height: 500px; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+            margin-top: 10px; 
+
+        }
+</style>
     </style>
     {% block script %} {% endblock %}
 </head>
@@ -151,7 +162,6 @@
         &copy; Ярославцев Богдан, ФБИ-24, 3 курс, 2024
     </footer>
 
-    <!-- Новогодние снежинки -->
     <div class="snowflake" style="left: 10%;top: 15%; animation-duration: 8s;">❅</div>
     <div class="snowflake" style="left: 20%;top: 15%; animation-duration: 6s;">❅</div>
     <div class="snowflake" style="left: 30%;top: 15%; animation-duration: 10s;">❅</div>

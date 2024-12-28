@@ -1,15 +1,13 @@
 from flask import Blueprint, render_template, redirect, request, session, url_for
-from db import db
-from db.models import users, articles
-from flask_login import login_user, logout_user, login_required, current_user
-from werkzeug.security import check_password_hash, generate_password_hash
-from sqlalchemy import or_
 
 lab9 = Blueprint('lab9', __name__)
 
 @lab9.route('/lab9/')
 def lab():
-    return render_template('lab9/index.html')
+    # Если данные уже есть в сессии, предлагаем сбросить их
+    if 'name' in session and 'age' in session and 'gender' in session and 'preference1' in session and 'preference2' in session:
+        return render_template('lab9/index.html', show_reset=True)
+    return render_template('lab9/index.html', show_reset=False)
 
 @lab9.route('/lab9/name', methods=['GET', 'POST'])
 def lab9_name():
@@ -54,13 +52,10 @@ def lab9_result():
     preference1 = session.get('preference1', 'вкусное')
     preference2 = session.get('preference2', 'сладкое')
 
-    # Определяем возрастную группу
     if age < 18:
         age_group = 'ребёнок'
     else:
         age_group = 'взрослый'
-
-    # Формируем подарок и картинку
     if preference1 == 'вкусное':
         if preference2 == 'сладкое':
             gift = 'мешочек конфет'
@@ -92,3 +87,9 @@ def lab9_result():
             greeting = f"Поздравляю тебя, {name}, желаю крепкого здоровья, мудрости и успехов во всех начинаниях. Вот тебе подарок — {gift}."
 
     return render_template('lab9/result.html', greeting=greeting, image=image)
+
+@lab9.route('/lab9/reset')
+def lab9_reset():
+    
+    session.clear()
+    return redirect(url_for('lab9.lab'))

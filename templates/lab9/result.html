@@ -4,5 +4,6 @@
 
 {% block main %}
     <h1>{{ greeting }}</h1>
-    <img src="{{ url_for('static', filename=image) }}" alt="Подарок">
+    <img src="{{ url_for('static', filename=image) }}" alt="Подарок" class="gift-image">
+    <a href="{{ url_for('lab9.lab') }}" class="button" >На главную</a>
 {% endblock %}

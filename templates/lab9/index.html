@@ -4,5 +4,10 @@
 
 {% block main %}
     <h1>Поздравления</h1>
-    <a href="{{ url_for('lab9.lab9_name') }}">Начать</a>
+    {% if show_reset %}
+        <p>Вы уже ввели данные. Хотите сбросить и ввести заново?</p>
+        <a href="{{ url_for('lab9.lab9_reset') }}" class="button">Сбросить данные</a>
+    {% else %}
+        <a href="{{ url_for('lab9.lab9_name') }}" class="button">Начать</a>
+    {% endif %}
 {% endblock %}
